@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgresimage
+  name: postgresimage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgresimage
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ../docker-compose.yml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: postgresimage
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: saei-config
+          image: postgres:latest
+          name: postgresimage
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: saei-db-volume
+      restartPolicy: Always
+      volumes:
+        - name: saei-db-volume
+          persistentVolumeClaim:
+            claimName: saei-db-volume
+status: {}

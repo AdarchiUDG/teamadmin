@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: saeiapi
+  name: saeiapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: saeiapi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ../docker-compose.yml
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: saeiapi
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef:
+                name: saei-config
+          image: prometheusapi:latest
+          name: saeiapi
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /App/wwwroot/vouchers
+              name: vouchers
+            - mountPath: /App/wwwroot/download
+              name: download
+      restartPolicy: Always
+      volumes:
+        - name: vouchers
+          persistentVolumeClaim:
+            claimName: vouchers
+        - name: download
+          persistentVolumeClaim:
+            claimName: download
+status: {}
