@@ -139,6 +139,8 @@ postgresimage   ClusterIP   10.152.183.179   <none>        5432/TCP   178m
 saeiapi         ClusterIP   10.152.183.200   <none>        6500/TCP   178m
 ```
 
+### [Para descargar la aplicación que utiliza esta api da click aquí](https://prometheus.cbnao.com/download/teamadmin.apk)
+
 ![App](images/app.png)
 
 Como adicional, podemos agregar nodos a este cluster utilizando el comando
