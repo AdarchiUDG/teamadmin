@@ -28,7 +28,7 @@ spec:
         - envFrom:
             - configMapRef:
                 name: saei-config
-          image: prometheusapi:latest
+          image: localhost/teamadmin:local
           name: saeiapi
           ports:
             - containerPort: 80
