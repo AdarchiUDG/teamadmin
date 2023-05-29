@@ -174,6 +174,10 @@ cbnao           Ready    <none>   11h   v1.26.4
 sv1.cbnao.com   Ready    <none>   83m   v1.26.4
 ```
 
+Utilizando el comando `microk8s enable dashboard` podemos activar el panel de control de kubernetes, el cual se vera de la siguiente manera
+
+![Dashboard](images/dashboard.png)
+
 ---
 
 ### Cheeky Monkey
