@@ -1,0 +1,1 @@
+kubectl apply -f download-persistentvolumeclaim.yaml,postgresimage-deployment.yaml,postgresimage-service.yaml,saei-db-volume-persistentvolumeclaim,saeiapi-deployment.yaml,saeiapi-service.yaml,vouchers-persistentvolumeclaim.yaml
