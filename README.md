@@ -141,6 +141,37 @@ saeiapi         ClusterIP   10.152.183.200   <none>        6500/TCP   178m
 
 ![App](images/app.png)
 
+Como adicional, podemos agregar nodos a este cluster utilizando el comando
+
+```bash
+❯ microk8s add-node
+From the node you wish to join to this cluster, run the following:
+microk8s join 134.195.91.254:25000/*********************
+
+Use the '--worker' flag to join a node as a worker not running the control plane, eg:
+microk8s join 134.195.91.254:25000/********************* --worker
+
+If the node you are adding is not reachable through the default interface you can use one of the following:
+microk8s join 134.195.91.254:25000/*********************
+microk8s join 185.198.26.226:25000/*********************
+microk8s join 10.89.0.1:25000/*********************
+microk8s join 10.88.0.1:25000/*********************
+microk8s join 10.89.2.1:25000/*********************
+microk8s join 10.89.3.1:25000/*********************
+microk8s join 10.89.4.1:25000/*********************
+microk8s join 10.89.6.1:25000/*********************
+microk8s join 10.89.5.1:25000/*********************
+```
+
+Para visualizar los nodos dentro de este cluster usamos el comando
+
+```bash
+❯ kubectl get no
+NAME            STATUS   ROLES    AGE   VERSION
+cbnao           Ready    <none>   11h   v1.26.4
+sv1.cbnao.com   Ready    <none>   83m   v1.26.4
+```
+
 ---
 
 ### Cheeky Monkey
