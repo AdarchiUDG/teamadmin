@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  saeiapi:
+    image: prometheusapi:latest
+    depends_on:
+      - "postgresimage"
+    build:
+      context: src
+      dockerfile: dockerfile
+    volumes:
+      - vouchers:/App/wwwroot/vouchers
+      - download:/App/wwwroot/download
+    ports:
+      - "6500:80/tcp"
+    environment:
+      PORT: "80"
+      CONN_STRING: ${CONN_STRING}
+      SECRET_KEY: ${SECRET_KEY}
+      BASE_URL: ${BASE_URL}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_EMAIL: ${SMTP_EMAIL}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+
+  postgresimage:
+    image: postgres:latest
+    ports:
+      - "5432/tcp"
+    restart: always
+    volumes:
+      - saei_db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+  
+volumes:
+  saei_db_volume:
+  vouchers:
+  download:
