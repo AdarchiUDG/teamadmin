@@ -29,6 +29,7 @@ spec:
             - configMapRef:
                 name: saei-config
           image: localhost/teamadmin:local
+          imagePullPolicy: Never
           name: saeiapi
           ports:
             - containerPort: 80
